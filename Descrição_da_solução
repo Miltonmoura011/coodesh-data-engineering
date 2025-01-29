@@ -47,3 +47,18 @@ Um dashboard para análise de vendas poderia conter os seguintes KPIs e visualiz
 3.	Tabela dinâmica 📋 – Filtros interativos para explorar dados detalhados por data, produto e vendedor.
 Ferramentas recomendadas: Power BI, Amazon QuickSight ou Tableau.
 
+Referências:
+AWS QuickSight:
+https://docs.aws.amazon.com/pt_br/quicksight/latest/user/viewing-visual-data.html?utm_source=
+https://docs.aws.amazon.com/pt_br/quicksight/latest/user/viewing-visual-details.html
+https://docs.aws.amazon.com/pt_br/quicksight/latest/user/customizing-visual-tooltips.html
+PyArrow:
+https://arrow.apache.org/docs/python/parquet.html#writing-to-partitioned-datasets
+https://arrow.apache.org/docs/python/generated/pyarrow.Table.html#pyarrow.Table.from_pandas
+SQLAlchemy:
+https://docs.sqlalchemy.org/en/20/core/connections.html
+https://docs.sqlalchemy.org/en/20/dialects/
+Pandas:
+https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_sql_query.html
+https://stackoverflow.com/questions/52934265/how-to-write-a-partitioned-parquet-file-using-pandas
+
