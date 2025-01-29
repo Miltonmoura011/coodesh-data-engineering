@@ -1,0 +1,49 @@
+Descrição do Código
+O código realiza um processo de ETL (Extração, Transformação e Carga) para migrar dados de um banco de dados SQL Server para um formato Parquet estruturado localmente, simulando um carregamento para um Data Lake no AWS S3.
+1.	Extração: Conecta-se ao banco de dados SQL Server usando SQLAlchemy e executa uma query (SELECT * FROM dbo.vendas) para extrair os dados da tabela vendas para um DataFrame Pandas.
+2.	Transformação:
+o	Converte a coluna data_venda para o formato ISO (YYYY-MM-DD).
+o	Extrai ano, mês e dia da data para criar partições.
+o	Agrupa os dados (groupby) para calcular o total de vendas por dia, removendo duplicatas.
+3.	Carga:
+o	Escreve os dados transformados no formato Parquet, salvando-os em um diretório local simulando o AWS S3.
+o	Os arquivos são particionados por ano/mês/dia para otimizar consultas no Data Lake.
+
+________________________________________
+📌 Consulta SQL para o Amazon Athena
+Esta query permite analisar as vendas totais por mês usando Amazon Athena sobre os dados no S3 após a escrita do DataFrame:
+SELECT 
+    ano,
+    mes,
+    SUM(total_vendas) AS total_vendas_mes
+FROM vendas
+GROUP BY ano, mes
+ORDER BY ano, mes;
+•	Explicação:
+o	Agrupa as vendas por ano e mês.
+o	Calcula a soma (SUM(total_vendas)) para obter o total mensal.
+o	Ordena os resultados para análise temporal.
+Este é um exemplo no SQL Server:
+ SELECT 
+    year(data_venda) as ano,
+    month(data_venda) as mes,
+    SUM(valor_total) AS total_vendas_mes
+FROM [dbo].[vendas]
+GROUP BY data_venda, valor_total
+ORDER BY ano, mes;
+
+________________________________________
+📌 Esboço de Dashboard
+Um dashboard para análise de vendas poderia conter os seguintes KPIs e visualizações:
+📊 Principais Métricas
+•	Total de vendas: Valor agregado do período selecionado.
+•	Quantidade de pedidos: Número de transações registradas.
+•	Ticket médio: Total de vendas / Quantidade de pedidos.
+•	Top 5 produtos mais vendidos: Ranking dos produtos com maior faturamento.
+•	Distribuição geográfica: Mapa das vendas por região.
+📈 Visualizações
+1.	Gráfico de linha 📈 – Evolução das vendas ao longo do tempo (ano/mês).
+2.	Gráfico de barras 📊 – Comparação de vendas por região.
+3.	Tabela dinâmica 📋 – Filtros interativos para explorar dados detalhados por data, produto e vendedor.
+Ferramentas recomendadas: Power BI, Amazon QuickSight ou Tableau.
+
